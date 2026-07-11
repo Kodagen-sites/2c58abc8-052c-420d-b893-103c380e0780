@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand palette — deep navy + gold (Style S2, Dark Monolithic) */
+  --bg-color: #13162e;
+  --fg-color: #f5f3e8;
+  --color-primary: #dbc03d;   /* gold accent — highlight token */
+  --color-accent: #dbc03d;
+  --color-secondary: #e3d383;
+  --color-navy: #202553;
+  --color-surface: #2a2d4b;
+
+  /* Font stacks are injected by next/font as --font-display / --font-body /
+     --font-mono on <html>; these fallbacks keep things sane if fonts fail. */
+  --font-display-stack: var(--font-display), "Fraunces", Georgia, serif;
+  --font-body-stack: var(--font-body), "Inter", system-ui, sans-serif;
+  --font-mono-stack: var(--font-mono), "Space Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-color);
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--fg-color);
+  font-family: var(--font-body-stack);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Anchor targets clear the fixed header when jumped to via #hash. */
+:target,
+[id] {
+  scroll-margin-top: 96px;
+}
+
+.font-display { font-family: var(--font-display-stack); }
+.font-body { font-family: var(--font-body-stack); }
+.font-mono { font-family: var(--font-mono-stack); }
+
+/* Vertical rhythm for full-bleed sections. */
+.section-pad {
+  padding-top: clamp(48px, 6vw, 96px);
+  padding-bottom: clamp(48px, 6vw, 96px);
+}
+
+/* Subtle gold selection to match the brand. */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 34%, transparent);
+  color: var(--fg-color);
+}
+
+/* Thin brand scrollbar on supported browsers. */
+* {
+  scrollbar-color: var(--color-surface) var(--bg-color);
+}
