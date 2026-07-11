@@ -1,0 +1,10 @@
+{
+  "tagline": "Everything we make, one storefront.",
+  "direction_statement": "A dark editorial storefront — deep navy with a gold accent, quiet display serif, and a single curated collection framed on glass surfaces.",
+  "hero_headline": "Everything we make, one storefront.",
+  "hero_subheadline": "sdsd is a considered online storefront — a single, quiet place to discover, browse, and buy the things we make.",
+  "about": "sdsd began with a simple frustration: buying the things we love online had become a chore. Endless tabs, cluttered grids, checkout flows that fight you at every step. So we built the opposite — one quiet storefront, carefully arranged, where the product is the point and everything else gets out of the way.",
+  "cta": "Browse the collection",
+  "pages": ["/", "/about", "/services", "/work", "/contact", "/privacy", "/terms"],
+  "style": "Dark monolithic editorial (S2) — parallax hero, glass cards, split-edges header, deep navy with gold accent."
+}

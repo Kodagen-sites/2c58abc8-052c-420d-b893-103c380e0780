@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
 import EditorBridge from "@/components/__kodagen/EditorBridge";
 import { FilmGrain, Vignette, ScrollProgress } from "@/components/motion";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { getKodagenLiveData } from "@/lib/kodagen-live";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -26,29 +28,38 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.seo.siteUrl),
-  title: {
-    default: siteConfig.seo.defaultTitle,
-    template: `%s — ${siteConfig.company.name}`,
-  },
-  description: siteConfig.seo.defaultDescription,
-  openGraph: {
-    title: siteConfig.seo.defaultTitle,
-    description: siteConfig.seo.defaultDescription,
-    url: siteConfig.seo.siteUrl,
-    siteName: siteConfig.company.name,
-    images: [{ url: siteConfig.seo.defaultOgImage }],
-    locale: siteConfig.seo.locale,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.seo.defaultTitle,
-    description: siteConfig.seo.defaultDescription,
-    images: [siteConfig.seo.defaultOgImage],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const live = await getKodagenLiveData();
+  const title = live.seo?.title || siteConfig.seo.defaultTitle;
+  const description =
+    live.seo?.description || siteConfig.seo.defaultDescription;
+  const keywords = live.seo?.keywords;
+
+  return {
+    metadataBase: new URL(siteConfig.seo.siteUrl),
+    title: {
+      default: title,
+      template: `%s — ${siteConfig.company.name}`,
+    },
+    description,
+    ...(keywords && keywords.length ? { keywords } : {}),
+    openGraph: {
+      title,
+      description,
+      url: siteConfig.seo.siteUrl,
+      siteName: siteConfig.company.name,
+      images: [{ url: siteConfig.seo.defaultOgImage }],
+      locale: siteConfig.seo.locale,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [siteConfig.seo.defaultOgImage],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -68,6 +79,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <CookieConsent />
+        <WhatsAppFloat />
         <EditorBridge />
       </body>
     </html>
